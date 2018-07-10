@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/basic/basic",
+    "pages/test/test",
+    "pages/double/fighting_room/fighting_room",
+    "pages/double/fighting_match/figthing_match",
+    "pages/single/single",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3883FA",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
+  }
+}

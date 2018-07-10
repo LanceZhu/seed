@@ -1,0 +1,80 @@
+.device{
+  background: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.header{
+  width: 92%;
+  height: 200rpx;
+  line-height: 200rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+}
+
+.header_image{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 25rpx;
+}
+
+.header_title{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 475rpx;
+}
+
+.content{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.box{
+  width: 100%;
+  height: 150rpx;
+  margin-top: 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  background: #fff; 
+}
+
+.box_left{
+  width: 200rpx;
+}
+
+.box_left image{
+    width: 100rpx;
+    height: 100rpx;
+    margin: 25rpx;
+    border-radius: 50%;
+}
+
+.box_right {
+  width: 475rpx;
+  padding: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.box_right .title {
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+}
+
+.box_right .desc {
+    font-size: 14px;
+    color: #666;
+}
