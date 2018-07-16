@@ -1,18 +1,18 @@
 <view class='header'>
   <view class='animated lightSpeedIn-left '>
-    <image src='{{userInfo_me.avatarUrl}}'></image>
-    <view style='font-size:26rpx'>{{userInfo_me.nickName}}</view>
+    <image src='/images/icons/naruto.jpg'></image>
+    <view style='font-size:26rpx'>foo</view>
     <view wx:if="{{game_over}}">
-      <text style='font-size:80rpx'>{{scoreMyself}}</text>分</view>
-  </view>
+      <text style='font-size:80rpx'>450</text>分</view>
+    </view>
 
   <view class='countdown animated rubberBand' wx:if="{{game_over ? false : true}}">{{countdown}}</view>
 
   <view class='animated lightSpeedIn-right'>
-    <image src='{{userInfo_others.avatarUrl}}'></image>
-    <view style='font-size:26rpx'>{{userInfo_others.nickName}}</view>
+    <image src='/images/icons/favicon-64.svg'></image>
+    <view style='font-size:26rpx'>bar</view>
     <view wx:if="{{game_over}}">
-      <text style='font-size:80rpx'>{{score_others}}</text>分 </view>
+      <text style='font-size:80rpx'>500</text>分 </view>
   </view>
 </view>
 
@@ -22,14 +22,14 @@
 
 <view class='body' wx:if="{{game_over ? false : true}}">
   <view class='animated animated_zoomIn {{zoomIn}} {{zoomOut}}' wx:if="{{question ? false : true}}">
-    <image src='../../imgs/VS.svg' style='width:600rpx;height:600rpx;'></image>
+    <image src='/images/icons/VS.svg' style='width:600rpx;height:600rpx;'></image>
   </view>
   <view class='title animated zoomIn'>{{question.ask}}</view>
   <view class='content animated fadeIn' wx:if="{{question}}">
     <view>
-      <view>{{scoreMyself}}</view>
+      <view>450</view>
       <view class='process'>
-        <view class='process_son' style='height: {{scoreMyself/500*100}}%;'></view>
+        <view class='process_son' style='height: {{450/500*100}}%;'></view>
       </view>
     </view>
 
@@ -44,9 +44,9 @@
     </view>
 
     <view>
-      <view>{{score_others}}</view>
+      <view>500</view>
       <view class='process'>
-        <view class='process_son' style='height: {{score_others/500*100}}%;'></view>
+        <view class='process_son' style='height: {{500/500*100}}%;'></view>
       </view>
     </view>
   </view>

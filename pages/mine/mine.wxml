@@ -1,0 +1,37 @@
+<view class='device'>
+  <view class='header'></view>
+  <view style='margin-top: 120rpx'>
+    <view class='content'>
+      <view class='user'>
+        <view>
+          <image src='{{userInfo.avatarUrl}}' mode='aspectFit' class='image'></image>
+        </view>
+        <view class='detail'>
+          <view class='name'>{{userInfo.nickName}}</view>
+          <view class='id'>正确率: {{mine.UAccuarcy}}</view>
+        </view>
+      </view>
+      <view class='notification'>
+        <view class='title'>
+          <image src='/images/icons/notification.png' style='width: 40rpx; height: 40rpx'></image>
+          <view class='desc'>通知</view>
+          <image src='/images/icons/more.png' style='width: 30rpx; height: 30rpx'></image>
+        </view>
+        <view class='programs'>
+          <view class='program'>
+            <image src='/images/icons/progress.png' class='image'></image>
+            学习进度
+          </view>
+          <view class='program'>
+            <image src='/images/icons/history_errors.png' class='image'></image>
+            历史错题
+          </view>
+          <view class='program'>
+            <image src='/images/icons/bookmarks.png' class='image'></image>
+            我的收藏
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

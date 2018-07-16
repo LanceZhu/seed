@@ -11,7 +11,7 @@
   top: -500rpx;
   width: 1200rpx;
   height: 600rpx;
-  background-color: #3883FA;
+  background-color: #6A84E3;
   border-radius: 50%;
   text-align: center;
 }
@@ -36,30 +36,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background: #fff;
+  background: blue;
   background: transparent;
-}
-
-.box1{
-  background: rgb(245,103,93);
-}
-
-.box2{
-  background: rgb(237,220,73);
-}
-
-.box3{
-  background: rgb(114,203,111); 
-}
-
-.box4{
-  background: rgb(95,189,183); 
 }
 
 .box_image{
   width: 252rpx;
   height: 252rpx;
-  border-radius: 50%;
 }
 
 .box_title{

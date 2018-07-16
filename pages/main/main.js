@@ -1,21 +1,27 @@
 // pages/main/main.js
 Page({
-
+  
   /**
    * 页面的初始数据
    */
   data: {
-    items: [{'title': '知识点', 'content': '知识点+题', 'desc': 'basic'},
-      { 'title': '个人', 'content': '刷题', 'desc': 'single' },
-      { 'title': '双人', 'content': 'PK', 'desc': 'double' },
-      { 'title': '我', 'content': '用户', 'desc': 'mine' },
-      ],
+    items: [{ 'title': '新知学习', 'content': '知识点+题', 'desc': 'basic', 'src': '/images/icons/KnowledgePoint.png' },
+    { 'title': '专属题场', 'content': '刷题', 'desc': 'single', 'src': '/images/icons/exercise.png' },
+    { 'title': '双人PK', 'content': 'PK', 'desc': 'double', 'src': '/images/icons/PK.png' },
+    { 'title': '个人中心', 'content': '用户', 'desc': 'mine', 'src': '/images/icons/user.png' },
+    ],
     winWidth: 0,
     winHeight: 0,
+    ratio: 0,
+    userInfo: {},
+    res: ''
   },
 
+  /**
+   * 跳转到详情页
+   */
   navigateToDetail: function(e){
-    console.log(e.currentTarget.dataset.desc);
+    console.log('navigateTo:'+e.currentTarget.dataset.desc);
     var urlName = e.currentTarget.dataset.desc;
     wx.navigateTo({
       url: '../'+urlName+'/'+urlName,
@@ -32,11 +38,17 @@ Page({
         */
         wx.getSystemInfo({
           success: function (res) {
-            console.log(res.windowHeight);
+            console.log('[main][winHeight]'+res.windowHeight);
+            console.log('[main][winWidth]' + res.windowWidth);
+            console.log('[main][ratio]' + 750 / res.windowWidth);
             that.setData({
               winWidth: res.windowWidth,
-              winHeight: res.windowHeight
+              winHeight: res.windowHeight,
+              ratio: 750 / res.windowWidth
             });
+            wx.setStorageSync('winHeight', res.windowHeight);
+            wx.setStorageSync('winWidth', res.windowWidth);
+            wx.setStorageSync('ratio', 750/res.windowWidth);
           }
         });
   },
@@ -52,7 +64,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    let that = this;
+    /**
+     * 判断用户是否登录
+     */
+    /**
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) {
+      wx.navigateTo({
+        url: "/pages/authorize/authorize"
+      })
+    } else {
+      that.setData({
+        userInfo: userInfo
+      })
+    }
+     */
   },
 
   /**

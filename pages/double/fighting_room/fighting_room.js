@@ -21,6 +21,8 @@ Page({
     win: 2,  //0:表示输，1：表示赢,2:表示平手
     sendNumber: 0,//每一轮的答题次数不能超过1次
   },
+
+  /**
   onLoad(options) {
     app.appData.fromClickId = options.currentClickId
     app.upDateUser_networkFromClickId = require('../../utils/upDateUser_networkFromClickId.js').upDateUser_networkFromClickId
@@ -37,7 +39,8 @@ Page({
     this.startAnimate()//定义开始动画
     this.fightingReady(options.roomName) //通知服务器我已准备好了
     this.exceptionalListener()  //监听异常情况，如断线重新连接  
-  },
+},
+
   onShareAppMessage(res) {
     const that = this;
     return {
@@ -52,11 +55,14 @@ Page({
       }
     }
   },
+
+  /**
   fightingReady(roomName) { //通知服务器我已准备好了
     const that = this
     const tunnel = this.tunnel = app.tunnel
     //tunnel.emit('has_ready', { roomName })//通知服务器，已经准备好可以答题了
 
+    
     //监听后台是否收到前端发送的选项
     tunnel.on('getAnswer', (res) => {
       that.setData({//答题后将hasClick设置为true,防止重新选择答案
@@ -269,4 +275,5 @@ Page({
       })
     }, 1500)
   }
+   */
 })

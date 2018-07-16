@@ -1,6 +1,15 @@
+// 引入 QCloud 小程序增强 SDK
+var qcloud = require('/utils/wafer-client-sdk/index');
+
+// 引入配置
+var config = require('/config');
+
 //app.js
 App({
   onLaunch: function () {
+    //设置登录地址
+    qcloud.setLoginUrl(config.service.loginUrl);
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

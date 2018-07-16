@@ -1,17 +1,22 @@
 {
   "pages": [
     "pages/main/main",
-    "pages/basic/basic",
-    "pages/test/test",
-    "pages/double/fighting_room/fighting_room",
-    "pages/double/fighting_match/figthing_match",
     "pages/single/single",
+    "pages/tutorial/tutorial",
+    "pages/authorize/authorize",
+    "pages/double/double",
+    "pages/double/fighting_room/fighting_room",
+    "pages/mine/mine",
+    "pages/basicDetail/basicDetail",
+    "pages/basic/basic",
+    "pages/double/fighting_match/fighting_match",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/double/rank_list/rank_list"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#3883FA",
+    "navigationBarBackgroundColor": "#6A84E3",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white"
   }
