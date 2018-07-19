@@ -1,0 +1,18 @@
+<view class='device'>
+  <view class='header'></view>
+  <view style='margin-top: 200rpx'>
+  <scroll-view scroll-y style="height:{{winHeight - 120}}px">
+    <view class='content'>
+      <view wx:for="{{items}}" wx:key="items" class='box' bindtap='navigateToDetail' data-id='{{item.id}}' data-locked='{{ item.locked }}'>
+        <view class="{{item.locked?'box_image_locked':'box_image_unlocked'}}">{{item.id}}</view>
+        <view class="{{item.locked ? 'box_content_locked':'box_content_unlocked'}}">
+          {{item.name}}
+          <view class='box_locked' wx:if='{{item.locked}}'>
+            <image src='/images/icons/locked.png' mode='aspectFit' class='box_locked'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  </view>
+</view>
