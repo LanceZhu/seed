@@ -1,4 +1,6 @@
-// pages/double/fighting_match/figthing_match.js
+const match = require('../../../utils/tunnelMatch.js').match //引入匹配函数
+const app = getApp()
+
 Page({
 
   /**
@@ -15,6 +17,8 @@ Page({
       this.setData({
         number: number
       });
+      number++;
+      /**
       console.log(this.data.number);
       if(this.data.number >= 3){
         wx.redirectTo({
@@ -24,14 +28,16 @@ Page({
       }else{
         number++;
       }
+       */
     }, 1000);
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (opt) {
     this.matchTimeRun();
+    app.pageGetUserInfo(this, match(this, app, opt))
   },
 
   /**
