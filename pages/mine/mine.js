@@ -37,7 +37,7 @@ Page({
   data: {
     items: {
       'user': {'avataUrl': '', 'name': 'f00bar', 'id': '001'}},
-      
+
     winWidth: 0,
     winHeight: 0,
     userInfo: {},
@@ -65,8 +65,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    /** 
-    * 获取系统信息 
+    /**
+    * 获取系统信息
     */
     wx.getSystemInfo({
       success: function (res) {
@@ -199,7 +199,7 @@ Page({
           month: paramDate.getMonth() + 1,
           calendars: calendars,
           days: days,
-          preMonth: "<",   
+          preMonth: "<",
           nextMonth: ">",
           showSign: showSign
         });

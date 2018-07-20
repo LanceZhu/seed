@@ -52,7 +52,7 @@
 }
 
 .content .user .detail .name{
-  
+
 }
 
 .content .user .detail .id{
@@ -113,7 +113,7 @@
 }
 
 .color-sign{
-  
+
   border-radius: 50%;
   color: #FFFFFF;
 }
@@ -165,5 +165,3 @@
   letter-spacing: 5px;
   padding: 0px;
 }
-
-
