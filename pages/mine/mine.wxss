@@ -113,7 +113,7 @@
 }
 
 .color-sign{
-  background-color: ;
+  
   border-radius: 50%;
   color: #FFFFFF;
 }

@@ -1,0 +1,31 @@
+<view class='device'>
+  <view class='header'></view>
+  <view style='margin-top: 120rpx'>
+  <view class='content'>
+    <view class = 'info'>
+      <view class='programs'>
+        <view class = 'program'>
+          <image src='/images/icons/lettered.png' class='image'></image>
+          <view class = 'text'>未读消息：3</view>
+        </view>
+        <view class='program'>
+         <image src='/images/icons/letterop.png' class='image'></image>
+         <view class ='text'>已读消息：0</view>
+        </view>
+      </view>
+    </view>
+
+    <view class='news'>
+    <view wx:for="{{items}}"  class='box'>
+      <view class = 'box_title'>{{item.title}}</view>
+      <view class = 'box_info'>{{item.info}}</view>
+      <image src='/images/icons/more.png' class = 'more'></image>
+    </view>
+
+  </view>
+  </view>
+
+
+
+  </view>
+</view>

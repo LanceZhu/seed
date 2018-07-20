@@ -12,7 +12,8 @@
     "pages/double/fighting_match/fighting_match",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/double/rank_list/rank_list"
+    "pages/double/rank_list/rank_list",
+    "pages/news/news"
   ],
   "window": {
     "backgroundTextStyle": "light",

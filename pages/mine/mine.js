@@ -36,8 +36,8 @@ Page({
    */
   data: {
     items: {
-      'user': {'avataUrl': '', 'name': 'f00bar', 'id': '001'}
-    },
+      'user': {'avataUrl': '', 'name': 'f00bar', 'id': '001'}},
+      
     winWidth: 0,
     winHeight: 0,
     userInfo: {},
@@ -291,5 +291,4 @@ Page({
   }
 
 
-  
 })

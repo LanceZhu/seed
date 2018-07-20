@@ -1,0 +1,88 @@
+/* pages/news/news.wxss */
+.device{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header{
+  position: absolute;
+  top: -500rpx;
+  width: 1200rpx;
+  height: 600rpx;
+  background-color: #6A84E3;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.content{
+  background: rgb(243, 242, 240);
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap:wrap;
+}
+
+.content .info{
+  background: white;
+  height: 150rpx;
+}
+
+.content .info .programs{
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.content .info .programs .program{
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  align-items: flex-end;
+}
+
+.content .info .programs .program .image{
+  width: 100rpx;
+  height: 80rpx;
+}
+
+.content .news .box{
+  background-color: white;
+  margin: 20rpx;
+  width: 750rpx;
+  height: 300rpx;
+  position:relative;
+}
+
+.content .news .box .box_title{
+  border-radius: 20rpx;
+  margin-left: 30rpx;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background-color: #6A84E3;
+  color: #FFFFFF;
+}
+
+.content .news .box .box_info{
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  font-size: 40rpx;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.content .news .box .more{
+  width: 30rpx; 
+  height: 30rpx;
+  position:absolute;
+  right:30rpx;
+  bottom:30rpx;
+}
