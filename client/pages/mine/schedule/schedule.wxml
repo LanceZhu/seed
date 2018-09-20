@@ -1,0 +1,35 @@
+<view>
+    <image src='/images/icons/header.png' class='header'></image>
+  </view>
+<view class="container">
+  <view class="options">
+    <view class="option {{choose === item.type ? 'sel' : ''}}" wx:for="{{options}}" wx:key="{{key}}" data-type="{{item.type}}" bindtap="getOption">
+      <view>{{item.title}}</view>
+    </view>
+  </view>
+  <view class="date">
+    <view class="now {{dateShow ? 'hide' : ''}}">
+      <view class="top-handle fs28 box box-lr box-align-center box-pack-center">
+        <view class="prev box box-rl" data-handle="pre" bindtap='getHandleDate'>
+          <view class="prev-handle box box-lr box-align-center box-pack-center">
+            <view class="arrow arrowLeft"></view>
+          </view>
+        </view>
+        <view class="date-area box box-lr box-align-center box-pack-center" bindtap='pickDate'>{{selectedDate.str}}</view>
+        <view class="next box box-lr" data-handle="next" bindtap='getHandleDate'>
+          <view class="next-handle box box-lr box-align-center box-pack-center">
+            <view class="arrow arrowRight"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="pick {{dateShow ? '' : 'hide'}}">
+      <template is="calendar" data="{{...calendar}}" />  
+    </view>
+  </view>
+  <view class="chart" bindtouchmove='handleTouchMove' bindtouchstart='handleTouchStart' bindtouchend='handleTouchEnd'>
+    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+  </view>
+</view>
+
+<import src="../../../template/calendar/index.wxml" />

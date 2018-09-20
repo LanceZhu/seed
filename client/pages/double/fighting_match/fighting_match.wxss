@@ -1,20 +1,19 @@
-.img-contain {
-  text-align: center;
-  padding: 150rpx 0;
+.content{
+  background: #6A84E3;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
 }
 
-.avatarUrl {
-  width: 160rpx;
-  height: 160rpx;
-  border: 6rpx solid white;
-  border-radius: 50%;
-}
 
 .time {
   position: relative;
   width: 400rpx;
   height: 400rpx;
-  margin: 100rpx auto;
+  margin-top:150rpx;
+
 }
 
 .t0 {
@@ -24,6 +23,9 @@
   text-align: center;
   height: 400rpx;
   line-height: 400rpx;
+  z-index: 2;
+  color:#fff;
+
 }
 
 .t1, .t2, .t3 {
@@ -35,7 +37,7 @@
   border-width: 8rpx;
   background: transparent;
   border-style: solid;
-  border-color: transparent #c11212 #c11212 #c11212;
+  border-color: transparent #fff #fff #fff;
   border-radius: 50%;
   -webkit-animation: ".t1" 2s infinite linear; /***一秒循环执行**/
   z-index: 100;
@@ -56,6 +58,7 @@
   top: 80rpx;
   -webkit-animation: ".t3" 3.5s infinite linear;
 }
+
 
 @-webkit-keyframes ".t1" {
   /**关键帧名称**/
@@ -91,4 +94,34 @@
   100% {
     -webkit-transform: rotate(0deg);
   }
+}
+
+.earth{
+  width:552rpx;
+  height:552rpx;
+  position: absolute;
+  left:-76rpx;
+  top:-76rpx;
+  z-index: 1;
+}
+
+.user{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar{
+  width:150rpx;
+  height:150rpx;
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+.userInfo{
+  width:500rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  margin-top:50rpx;
 }

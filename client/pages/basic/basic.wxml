@@ -1,17 +1,42 @@
 <view class='device'>
-  <view class='header'></view>
-  <view style='margin-top: 200rpx'>
+  <view>
+    <image src='/images/icons/header.png' class='header'></image>
+  </view>
+  <view style='margin-top: 100rpx'>
   <scroll-view scroll-y style="height:{{winHeight - 120}}px">
     <view class='content'>
-      <view wx:for="{{items}}" wx:key="items" class='box' bindtap='navigateToDetail' data-id='{{item.id}}' data-locked='{{ item.locked }}'>
-        <view class="{{item.locked?'box_image_locked':'box_image_unlocked'}}">{{item.id}}</view>
-        <view class="{{item.locked ? 'box_content_locked':'box_content_unlocked'}}">
-          {{item.name}}
-          <view class='box_locked' wx:if='{{item.locked}}'>
-            <image src='/images/icons/locked.png' mode='aspectFit' class='box_locked'></image>
+
+        <view class="kind-list">
+
+        <block wx:for="{{itemss}}" wx:for-item='chapter' wx:key="{{chapter.id}}">
+
+          <view class="kind-list-item">
+
+            <view id="{{chapter.id}}" class="kind-list-item-hd {{chapter.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
+
+              <view class="kind-list-text">{{chapter.name}}</view>
+
+            </view>
+
+            <view class="kind-list-item-bd {{chapter.open ? 'kind-list-item-bd-show' : ''}}">
+
+              <view class="navigator-box {{chapter.open ? 'navigator-box-show' : ''}}">
+
+                <block wx:for="{{chapter.children}}" wx:for-item='unit' wx:key="*item" wx:for-index='index'>
+                  <navigator url="./basicDetail/basicDetail?chapterId={{chapter.id}}&nameId={{index+1}}&chapter={{chapter.name}}&name={{unit}}" class="navigator">
+                    <view class="navigator-text">{{unit}}</view>
+                    <view class="navigator-arrow"></view>
+                  </navigator>
+                </block>
+                
+              </view>
+            </view>
+
           </view>
-        </view>
+        </block>
+        
       </view>
+
     </view>
   </scroll-view>
   </view>

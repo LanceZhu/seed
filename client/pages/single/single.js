@@ -1,65 +1,202 @@
-// pages/single/single.js
-
-//引入vender中的sdk避免冲突
-// 引入 QCloud 小程序增强 SDK
-//var qcloud = require('../../utils/wafer-client-sdk/index');
-
-// 引入配置
-//var config = require('../../config');
-
+var qcloud = require('../../vendor/wafer2-client-sdk/index.js')
+var util = require('../../utils/util.js')
+var config = require('../../config.js')
+var app = getApp()
+var timerCountdown = ''
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    items: {
-      'question': '以下哪个不是setup()函数的常见作用？',
-      'answers': [{ 'answer': '初始化变量', 'id': 1, 'right': false },
-      { 'answer': '动态控制 Arduino 主控板', 'id': 2, 'right': true },
-      { 'answer': '设置引脚的输出\输入类型', 'id': 3, 'right': false },
-      { 'answer': '配置串口', 'id': 4, 'right': false }
-      ],
-      'rightAnswer': '动态控制 Arduino 主控板'
-    },
-      answerColor: '',
-      clickId: '',
-      localClick: false,
-      winWidth: 0,
-      winHeight: 0,
-      ratio: 0
+    question: '', //信道服务请求
+    ask: {},
+    question_counts: 0,
+    question_options: {},
+    countdown: 0,
+    answerColor: '',
+    clickIndex: '',
+    localClick: false,
+    winWidth: 0,
+    winHeight: 0,
+    ratio: 0,
+    chapters: [
+      { chapter: "Arduino语言介绍", chapterId: 1, checked: 0 },
+      { chapter: "变量", chapterId: 2, checked: 0 },
+      { chapter: "运算符", chapterId: 3,checked: 0 },
+      { chapter: "控制语句", chapterId: 4,checked: 0 },
+      { chapter: "数组", chapterId: 5, checked: 0 },
+      { chapter: "函数（一）", chapterId: 6, checked: 0 },
+      { chapter: "函数（二）", chapterId: 7,checked: 0 },
+      { chapter: "指针", chapterId: 8, checked: 0 },
+      { chapter: "类和对象", chapterId: 9, checked: 0 },
+    ],
+    chapters_chosen: false,
+    recommendationDone: false
+  },
+  onLoad: function (options) {
+    var that = this;
+    wx.setNavigationBarTitle({
+      title: options.title
+    });
+    that.setData({
+      winHeight: wx.getStorageSync('winHeight'),
+      winWidth: wx.getStorageSync('winWidth'),
+      ratio: wx.getStorageSync('ratio')
+    })
+    if(options.fromBasicDetail){
+      that.setData({
+        chapters_chosen: true,
+        question_counts: options.question_counts,
+        question_options: {
+          'chapterId': options.chapterId,
+          'unitId': options.nameId,
+          'counts': options.question_counts
+        }
+      })
+      that.connect()
+    }
+  },
+
+  onReady: function () {
+  },
+  onShow: function () {
+    this.setData({
+      countdown: 0
+    })
+    if(app.tunnel && app.tunnel.isActive()){
+      app.tunnel.close()
+    }
+  },
+  onHide: function () {
+    clearInterval(timerCountdown)
+  },
+  onUnload: function () {
+    this.quit()
+    clearInterval(timerCountdown)
+  },
+  onShareAppMessage: function () {
+    return {
+      title: "碎片时间学编程",
+      path: "/pages/main/main"
+    };
+  },
+
+  connect() {
+    wx.showLoading({
+      title: '加载中...'
+    })
+    var that =this
+    that.quit()
+
+    var tunnel = that.tunnel = new qcloud.Tunnel(config.service.tunnelSingle)
+    tunnel.on('connect', () => { console.log('信道连接成功')})
+    tunnel.on('close', () => { console.log('信道关闭')})
+    tunnel.on('reconnecting', () => console.log('信道断开连接，正在重连'))
+    tunnel.on('reconnect', () => console.log('信道重连成功'))
+    tunnel.on('error', () => console.log('信道连接发生错误'))
+    tunnel.on('connected',(res) => {
+      tunnel.emit('ask', that.data.question_options)
+      wx.hideLoading()
+    })
+    //监听服务器端发送过来的问题
+    tunnel.on('sendQuestion', (res) => {
+      console.log('收到题目',res)
+      let question = res.question
+      if (Object.getOwnPropertyNames(question).length) {
+        question.answer = JSON.parse(question.answer)//将答案转换为js对象
+        var ask = app.towxml.toJson(question.ask, 'markdown', that)
+        ask.theme = 'min'
+        that.setData({
+          ask: ask
+        })
+        //错题解析使用
+        var right_answer = ''
+        for (let i = 0; i < question.answer.length; i++) {
+          if (question.answer[i].right == 1) {
+            right_answer = question.answer[i].answer
+          }
+        }
+        wx.setStorage({
+          key: 'last_question',
+          data: question,
+        })
+      }
+      if (Object.getOwnPropertyNames(question).length) {
+        that.setData({
+          question
+        })
+        //错题解析
+        wx.setStorage({
+          key: 'ask',
+          data: ask,
+        })
+        wx.setStorage({
+          key: 'analysis',
+          data: question.analysis,
+        })
+        wx.setStorage({
+          key: 'right_answer',
+          data: right_answer,
+        })
+        that.reset()//运行重置函数
+      } else {
+        util.showSuccess('已无推荐题目')
+        that.setData({
+          recommendationDone: true
+        })
+        console.log('已无推荐题目')
+        that.tunnel.close()
+      }
+
+    })
+
+    //信道连接
+    tunnel.open()
+  },
+
+  //定义重置函数
+  reset: function () {
+    var that = this
+    clearInterval(timerCountdown)
+    that.setData({
+      countdown: 0,
+      localClick: false
+    })
+    timerCountdown = setInterval(function () {
+      let countdown = that.data.countdown
+      countdown++
+      that.setData({
+        countdown
+      })
+    }, 1000)
   },
 
   /**
    * 提交问题
+   * e 答题情况
    */
   answer: function (e) {
     var that = this;
-    //console.log(that.data.clickId);
+    if (that.tunnel.isClosed()) {
+      util.showSuccess('已无推荐题目！')
+    }
     if(!that.data.localClick){
       if (e.currentTarget.dataset.right) {
         that.setData({
           answerColor: 'right', 
-          clickId: e.currentTarget.dataset.id
+          clickIndex: e.currentTarget.dataset.index
         });
-        let number = 1;
-        let time = setInterval(function() {
-          if (number > 1) {
-            that.sendAnswer(that);
-            clearInterval(time);
-          } else {
-            console.log(number);
-            number++;
-          }
-        }, 500);
+        setTimeout(function(){
+          that.sendAnswer(that,true)
+        },1000)
       } else {
         that.setData({
           answerColor: 'error',
-          clickId: e.currentTarget.dataset.id
+          clickIndex: e.currentTarget.dataset.index
         });
-        wx.navigateTo({
-          url: '../tutorial/tutorial'
-        });
+        setTimeout(function () {
+          that.sendAnswer(that, false)
+          wx.navigateTo({
+            url: './tutorial/tutorial?id='+that.data.question.id+'&chapter_id='+that.data.chapter_id+'&unit_id='+that.data.unit_id
+          })
+        }, 1000)
       };
       that.setData({
         localClick: true
@@ -67,117 +204,75 @@ Page({
     };
   },
 
-  /**
-   * 提交请求
-   */
-  sendAnswer: function(that){
-    /**
-     * 提交请求
-     */
-    /**
-    qcloud.request({
+  //退出专属题场
+  quit() {
+    if (this.tunnel && this.tunnel.isActive()) {
+      this.tunnel.close();
+      console.log('信道关闭')
+    }
+  },
 
-    });
-    */
-    /**
-     * 模拟请求
-     */
+//提交请求
+  sendAnswer: function(that,right){
+    var date = new Date()
+    console.log(util.formatTime(date))
+    that.tunnel.emit('answer',{
+      id: that.data.question.id,
+      chapterId: that.data.question.chapter_id,
+      unitId: that.data.question.unit_id,
+      time: that.data.countdown,
+      datetime: util.formatTime(date),
+      right: right,
+      ask: that.data.question.ask
+    })
     that.setData({
-      items: {
-        'question': that.data.items.question+'asdf',
-        'answers': [{ 'answer': '初始化变量', 'id': 1, 'right': false },
-        { 'answer': '动态控制 Arduino 主控板', 'id': 2, 'right': true },
-        { 'answer': '设置引脚的输出\输入类型', 'id': 3, 'right': false },
-        { 'answer': '配置串口', 'id': 4, 'right': false }
-        ],
-        'rightAnswer': '动态控制 Arduino 主控板'
-      },
       answerColor: '',
-      clickId: '',
+      clickIndex: '',
       localClick: false,
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this;
-    /** 
-    * 获取系统信息 
-    */
-    var winHeight = wx.getStorageSync('winHeight');
-    if(winHeight){
-      that.setData({
-        winHeight: winHeight,
-        winWidth: wx.getStorageSync('winWidth'),
-        ratio: wx.getStorageSync('ratio')
-      })
-    }else{
-      wx.getSystemInfo({
-        success: function (res) {
-          console.log('[single][winHeight]' + res.windowHeight);
-          console.log('[single][winWidth]' + res.windowWidth);
-          console.log('[single][ratio]' + 750 / res.windowWidth);
-          that.setData({
-            winWidth: res.windowWidth,
-            winHeight: res.windowHeight,
-            ratio: 750 / res.windowWidth
-          });
-          wx.setStorageSync('winHeight', res.windowHeight);
-          wx.setStorageSync('winWidth', res.windowWidth);
-          wx.setStorageSync('ratio', 750 / res.windowWidth);
+  checkboxChange: function(e){
+    var values = e.detail.value;
+    var chapters = this.data.chapters;
+    console.log('[选项]',values)
+    for (var i = 0; i < chapters.length; i++) {
+      chapters[i].checked = false;
+      for (var j = 0; j < values.length; j++) {
+        if (chapters[i].chapter == values[j]) {
+          chapters[i].checked = true;
         }
-      });
+      }
     }
+
+    this.setData({
+      chapters: chapters,
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  chapter_submit: function(){
+    var that = this
+    that.setData({
+      chapters_chosen: true
+    })
+    var chapter
+    var chapter_chosen = []
+    for(chapter in that.data.chapters){
+      if(that.data.chapters[chapter].checked){
+        chapter_chosen.push(that.data.chapters[chapter].chapterId)
+      }
+    }
+    if(chapter_chosen.length == 0){
+      chapter_chosen = [1,2,3,4,5,6,7,8,9]
+    }
+    console.log(chapter_chosen)
+    that.setData({
+      question_options: {
+        'chapterId': chapter_chosen,
+        'unitId': false,
+        'counts': false
+      }
+    })
+    that.connect()
   }
 })

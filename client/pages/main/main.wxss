@@ -7,13 +7,8 @@
 }
 
 .header{
-  position: absolute;
-  top: -500rpx;
-  width: 1200rpx;
-  height: 600rpx;
-  background-color: #6A84E3;
-  border-radius: 50%;
-  text-align: center;
+  width: 750rpx;
+  height: 100rpx;
 }
 
 .content{

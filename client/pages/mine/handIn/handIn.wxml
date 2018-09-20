@@ -1,0 +1,19 @@
+<view class='device'>
+<image src='/images/icons/header.png' class='header_image'></image>
+  <view class='content'>
+    <view class='programs'>
+        <view class='program'>
+          <image src='/images/icons/upload.png' class='image1'></image>
+          <view class = 'text'>已贡献：0</view>
+        </view>
+        <view class='program'>
+         <!--<image src='/images/icons/right.png' class='image2'></image>-->
+         <view class ='text'>已过审：0</view>
+        </view>
+    </view>
+    <view class="inputView">
+    <textarea class="input" placeholder="请输入题目、正确答案及解析" bindinput="listenerInput" />
+    <button class='sign-btn' bindtap="listenerLogin">提交</button>
+    </view>
+  </view>
+</view>

@@ -6,9 +6,9 @@ const Session = require('../vendor/wafer2-client-sdk/lib/session.js')
  * @param app 小程序实例
  * @param opt 当前页面相关数据
  */
-function match(page, app, opt){
+function match(page, app, opt) {
   const that = page
-  if(app.appData.tunnelStatus != 'close'){
+  if (app.appData.tunnelStatus != 'close') {
     app.tunnel.close()
   }
   app.tunnelCreate()//app统一创建信道，并监听相关变化
@@ -16,7 +16,7 @@ function match(page, app, opt){
 
   //获取当前信道id
   function getCurrentTunnelId() {
-    console.log(app.tunnel.socketUrl.slice(app.tunnel.socketUrl.indexOf('tunnelId=') + 9, app.tunnel.socketUrl.indexOf('&')))
+    console.log('[getCurrentTunnelId]', app.tunnel.socketUrl.slice(app.tunnel.socketUrl.indexOf('tunnelId=') + 9, app.tunnel.socketUrl.indexOf('&')))
     return app.tunnel.socketUrl.slice(app.tunnel.socketUrl.indexOf('tunnelId=') + 9, app.tunnel.socketUrl.indexOf('&'))
   }
 
@@ -26,10 +26,11 @@ function match(page, app, opt){
     userInfo.tunnelId = getCurrentTunnelId()
     that.setData({
       status: '已连接，对手匹配中...',
-      userInfo,//用户i洗脑洗存储当前的信道Id
+      userInfo,//用户信息存储当前的信道Id
     })
     //发起匹配
-    tunnel.emit('updateMatchInfo', {//发起匹配
+    console.log('信道连接成功,发起匹配[emit][updateMatchInfo]')
+    tunnel.emit('updateMatchInfo', {
       openId: that.data.openId,
       sortId: opt.sortId,
       friendsFightingRoom: opt.friendsFightingRoom//匹配者含friendsFightingRoom则说明是好友之间的匹配
@@ -77,7 +78,7 @@ function match(page, app, opt){
 
   //监听匹配成功
   tunnel.on('matchNotice', (res) => {//监听匹配成功
-    console.log('res', res)
+    console.log('[matchNotice]', res)
     let user_me, user_others
     if (res.player1.openId === that.data.openId) {
       user_me = res.player1
@@ -90,9 +91,10 @@ function match(page, app, opt){
     wx.setStorageSync('user_others', user_others)
     that.setData({ status: user_me.nickName + ' VS ' + user_others.nickName })
     setTimeout(goto_fighting_room, 2000)//延迟1s跳转到战队页面
+    let friends_match = opt.friends_match ? opt.friends_match : 0
     function goto_fighting_room() {
       wx.redirectTo({ //navigateTo不会会卸载该页面，只是将当前页面隐藏了,redirectTo会销毁当前页面
-        url: `../fighting_room/fighting_room?roomName=${res.player1.roomName}`
+        url: `../fighting_room/fighting_room?roomName=${res.player1.roomName}`+'&friends_match='+friends_match
       })
     }
   })

@@ -1,47 +1,52 @@
 <view >
-
-  <view class='tab'>
-    <view class="{{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">好友排名</view>
-    <view class="{{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">全球排名</view>
-  </view>
-  <view >
-
-    <view wx:if='{{currentTab==0}}' >
-      <view wx:for="{{friendsData}}" class='item' wx:key='friendsData'>
-        <view style='width:10%;font-size:38rpx;'>{{index+1}}</view>
-        <view style='width:30%;'>
-          <image src='{{item.avatarUrl}}'></image>
-        </view>
-        <view style='width:70%;'>
-          <view class='itemDetail'>
-            <text>{{item.nickName}}</text>
-            <text style='font-size:28rpx;'>来自:{{item.city}}</text>
-          </view>
-          <view class='itemDetail'>
-            <text>最强王者</text>
-            <text style='font-size:28rpx;'>得分:{{item.score}}</text>
-          </view>
-        </view>
-      </view>
+  <view class="swiper-tab">  
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">好友排名</view>  
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">总排名</view> 
     </view>
-    <view wx:if='{{currentTab==1}}'>
-      <view wx:for="{{globalData}}" class='item' wx:key='globalData'>
-        <view style='width:10%;font-size:38rpx;'>{{index+1}}</view>
-        <view style='width:30%;'>
-          <image src='{{item.avatarUrl}}'></image>
-        </view>
-        <view style='width:70%;'>
-          <view class='itemDetail'>
-            <text>{{item.nickName}}</text>
-            <text style='font-size:28rpx;'>来自:{{item.city?item.city:'德玛西亚'}}</text>
-          </view>
-          <view class='itemDetail'>
-            <text>最强王者</text>
-            <text style='font-size:28rpx;'>得分:{{item.score}}</text>
-          </view>
-        </view>
-      </view>
+    <view>
+      <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" style='height: {{winHeight*ratio - 82}}rpx'> 
+        <swiper-item>
+          <scroll-view style='height: 100%' scroll-y='true'>
+              <view wx:for="{{friendsData}}" class='item' wx:key='friendsData'>
+                <view style='width:10%;font-size:38rpx;'>{{index+1}}</view>
+                <view style='width:30%;'>
+                  <image src='{{item.avatarUrl}}'></image>
+                </view>
+                <view style='width:70%;'>
+                  <view class='itemDetail'>
+                    <text>{{item.nickName}}</text>
+                    <text style='font-size:28rpx;'>来自:{{item.city ? item.city:'未知'}}</text>
+                  </view>
+                  <view class='itemDetail'>
+                    <text>最强王者{{item.rank}}</text>
+                    <text style='font-size:28rpx;'>得分:{{item.score}}</text>
+                  </view>
+                </view>
+              </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view style='height: 100%' scroll-y='true' bindscrolltolower="loadMore">
+            <view wx:for="{{globalData}}" class='item' wx:key='globalData'>
+              <view style='width:10%;font-size:38rpx;'>{{index+1}}</view>
+              <view style='width:30%;'>
+                <image src='{{item.avatarUrl}}'></image>
+              </view>
+              <view style='width:70%;'>
+                <view class='itemDetail'>
+                  <text>{{item.nickName}}</text>
+                  <text style='font-size:28rpx;'>来自:{{item.city?item.city:'未知'}}</text>
+                </view>
+                <view class='itemDetail'>
+                  <text>最强王者</text>
+                  <text style='font-size:28rpx;'>得分:{{item.score}}</text>
+                </view>
+              </view>
+            </view>
+            <view class='bottomLine'> ------------------ {{globalData_done ? '已无更多':'下拉加载更多'}} ------------------</view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
     </view>
-  </view>
 
 </view>

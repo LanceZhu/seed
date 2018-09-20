@@ -1,0 +1,75 @@
+.device{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header_image{
+  height: 80rpx;
+  width: 750rpx;
+}
+
+.content{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content .programs{
+  background: white;
+  height: 150rpx;
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 20rpx solid #F2F2F2;
+}
+
+.content .programs .program{
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  align-items: center;
+  
+}
+
+.content .programs .program .image1{
+  width: 60rpx;
+  height: 44rpx;
+  margin-right: 30rpx;
+}
+
+.content .programs .program .image2{
+  width: 52rpx;
+  height: 52rpx;
+  margin-right: 30rpx;
+}
+
+
+
+.input{
+    border:  2rpx solid #F6F6F6;
+    height:600rpx;
+}
+
+.inputView{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.sign-btn{
+  margin-top: 20px;
+  margin-right:0rpx;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #6A84E3;
+  color: #FFFFFF;
+  letter-spacing: 5px;
+  align-self: flex-end;
+}

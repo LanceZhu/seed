@@ -1,0 +1,48 @@
+@import '../../../template/calendar/index.wxss';
+
+.header{
+  width: 750rpx;
+  height: 100rpx;
+}
+
+.content{
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tip{
+  margin: 20rpx auto;
+  font-size: 30rpx;
+}
+
+.tip text{
+  font-size: 61rpx;
+  font-weight: bold;
+  color: #6A84E3;
+}
+
+.signin{
+  margin-top: 80rpx;
+  width: 130rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  border-radius: 15px;
+  font-size: 32rpx;
+  background: #6A84E3;
+  color: white;
+}
+
+.signin_hover{
+  margin-top: 80rpx;
+  width: 130rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  border-radius: 15px;
+  font-size: 32rpx;
+  background: rgb(90, 119, 226);
+  color: white;
+}

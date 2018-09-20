@@ -1,0 +1,41 @@
+<view class='device'>
+  <view class='header'>
+    <image src='/images/icons/header.png' class='header_image'></image>
+  </view>
+  <view style='margin-top: 100rpx'>
+    <view class="swiper-tab">  
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">已做题({{question_sum}})</view>  
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">错题({{question_error_sum}})</view> 
+    </view>
+    <view>
+      <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" style='height: {{winHeight*ratio - 182}}rpx'> 
+        <swiper-item>
+          <scroll-view style='height: 100%' scroll-y='true'>
+              <view class='content'>
+                <view class='news'>
+                  <view wx:for="{{question_history}}" class='box' hover-class='box_hover' wx:key="question_history" wx:for-item="question" bindtap='question_detail' data-questionid='{{question.question_id}}'>
+                    <view class='title'>问题{{question.question_id}}</view>
+                    <view class='question'>问题{{question.ask}}</view>
+                    <view class='info'>{{question.datetime ? question.datetime : '未知'}}</view>
+                  </view>
+                </view>
+              </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view style='height: 100%' scroll-y='true'>
+              <view class='content'>
+                <view class='news'>
+                  <view wx:for="{{question_history_errors}}" class='box' hover-class='box_hover' wx:key="question_history" wx:for-item="question" bindtap='question_detail' data-questionid='{{question.question_id}}'>
+                    <view class='question'>问题{{question.question_id}}</view>
+                    <view class='question'>问题{{question.ask}}</view>
+                    <view class='info'>{{question.datetime ? question.datetime : '未知'}}</view>
+                  </view>
+                </view>
+              </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</view>

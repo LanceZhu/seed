@@ -1,9 +1,11 @@
 <view class='device'>
-  <view class='header'></view>
-  <view style='margin-top: 120rpx'>
+  <view>
+    <image src='/images/icons/header.png' class='header'></image>
+  </view>
+  <view style='margin-top: 0rpx'>
   <scroll-view scroll-y style="height:{{winHeight - 100}}px">
   <view class='content'>
-    <view wx:for="{{items}}" wx:key="items" class='box' bindtap='navigateToDetail' data-desc='{{item.desc}}'>
+    <view wx:for="{{items}}" wx:key="items" class='box' bindtap='navigateToDetail' data-desc='{{item.desc}}' data-title='{{item.title}}'>
         <image src='{{ item.src }}' class='box_image'></image>
       <view class='box_title'>{{item.title}}{{ res }}</view>
     </view>

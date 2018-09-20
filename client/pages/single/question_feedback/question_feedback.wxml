@@ -1,0 +1,9 @@
+<view>
+{{question.id}}
+</view>
+<view>
+{{question.ask}}
+</view>
+<view>
+{{question.analysis}}
+</view>

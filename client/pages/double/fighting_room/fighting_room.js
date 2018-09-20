@@ -1,10 +1,19 @@
+const qcloud = require('../../../vendor/wafer2-client-sdk/index')
+const config = require('../../../config')
+const util = require('../../../utils/util.js')
+const app = getApp()
+const option = {
+  CHOICE_DELAY_SHOW: 1500,//选项延时1.5S显示
+}
+
 Page({
   data: {
     roomName: '',//对战房间号
     userInfo_me: '', //本人用户信息
     userInfo_others: '',//对手用户信息
-    countdown: 10,//倒计时
+    countdown: 20,//倒计时
     question: '',//websocket服务器传过来的问题及答案
+    ask: {},//md转为wxml后的问题
     hasClick: false,//判断是否已选答案，不能重新选择
     localClick: false,//是否本地单击的答案
     tunnelIdReplacing: 0,//tunnelIdReplacing存在2种转态：0表示不存在信道替换，1表示信道正在替换中:禁止发送数据
@@ -20,12 +29,25 @@ Page({
     game_over: false,  //判断此次PK是否结束
     win: 2,  //0:表示输，1：表示赢,2:表示平手
     sendNumber: 0,//每一轮的答题次数不能超过1次
+    winHeight: 0,
+    winWidth: 0,
+    ratio: 0,
+    friends_match: 0
   },
-
-  /**
   onLoad(options) {
+    var that = this
+    that.setData({
+      winHeight: wx.getStorageSync('winHeight'),
+      winWidth: wx.getStorageSync('winWidth'),
+      ratio: wx.getStorageSync('ratio')
+    })
+    if(options.friends_match == '1'){
+      that.setData({
+        friends_match: 1
+      })
+    }
     app.appData.fromClickId = options.currentClickId
-    app.upDateUser_networkFromClickId = require('../../utils/upDateUser_networkFromClickId.js').upDateUser_networkFromClickId
+    app.upDateUser_networkFromClickId = require('../../../utils/upDateUser_networkFromClickId.js').upDateUser_networkFromClickId
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -39,42 +61,41 @@ Page({
     this.startAnimate()//定义开始动画
     this.fightingReady(options.roomName) //通知服务器我已准备好了
     this.exceptionalListener()  //监听异常情况，如断线重新连接  
-},
-
+  },
+  onUnload(){
+    //this.quit()
+  },
   onShareAppMessage(res) {
     const that = this;
     return {
       title: '谁才是头脑王者？比比看吧！',
-      path: `/pages/entry/entry?currentClickId=${app.appData.currentClickId}`,
+      path: `/pages/main/main?currentClickId=${app.appData.currentClickId}`,
       success(res) {
         //转发时向用户关系表中更新一条转发记录(个人为person，群为GId)。
-        require('../../utils/upDateShareInfoToUser_network.js').upDateShareInfoToUser_network(app, that, res)
+        require('../../../utils/upDateShareInfoToUser_network.js').upDateShareInfoToUser_network(app, that, res)
         wx.redirectTo({
-          url: '../entry/entry'
+          url: '../../main/main'
         })
       }
     }
   },
-
-  /**
   fightingReady(roomName) { //通知服务器我已准备好了
     const that = this
-    const tunnel = this.tunnel = app.tunnel
-    //tunnel.emit('has_ready', { roomName })//通知服务器，已经准备好可以答题了
+    const tunnel = that.tunnel = app.tunnel
+    //tunnel.emit('has_ready', { roomName })//通知服务器，已经准备好可以答题了 //直接发送延时显示题目
 
-    
-    //监听后台是否收到前端发送的选项
-    tunnel.on('getAnswer', (res) => {
-      that.setData({//答题后将hasClick设置为true,防止重新选择答案
-        hasClick: true
-      })
-    })
     //监听是否在重连,若是，则禁止发送数据到后台
     app.tunnelReconnectingCallback = () => {
       that.setData({
         tunnelIdReplacing: 1,//tunnelIdReplacing存在2种转态：0表示不存在信道替换，1表示信道正在替换中 
       })
     }
+    //监听后台是否收到前端发送的选项 收到回复后锁定已选答案
+    tunnel.on('getAnswer', (res) => {
+      that.setData({//答题后将hasClick设置为true,防止重新选择答案
+        hasClick: true
+      })
+    })
     //监听逃跑者的信息
     tunnel.on('runawayNotice', (res) => {
       console.log('对手已逃跑')
@@ -85,15 +106,21 @@ Page({
       })
       app.tunnel.close()
     })
+
     //监听服务器端发送过来的问题
     let getNextQuestions, timerCountdown, timerReset  //定义倒计时定时器，定义重置定时器(注意：只有将timer_countdown定义在最外边才能清除掉上一个定时器)
     tunnel.on('sendQuestion', (res) => {
-      console.log('收到题目', res)
+      console.log('收到题目', res.question)
       let question = res.question
       if (Object.getOwnPropertyNames(question).length) {
         question.answer = JSON.parse(question.answer)//将答案转换为js对象
+        var ask = app.towxml.toJson(question.ask, 'markdown', that)
+        ask.theme = 'min'
+        that.setData({
+          ask: ask
+        })
       }
-      //显示对手的答题状态
+      //获取对手的答题情况并显示
       if (res.choicePlayer1[0] !== that.data.userInfo_me.openId) {
         that.setData({
           status_users_others: {
@@ -116,13 +143,15 @@ Page({
         })
       }
 
-      clearTimeout(getNextQuestions)
+      clearTimeout(getNextQuestions) // 2s显示下一题
+
+      // 双方答题情况显示2s,根据题目剩余情况选择显示下一题或结束
       if (Object.getOwnPropertyNames(question).length) {
         getNextQuestions = setTimeout(function () { //先等待2s查看对方的选择状态，再开始下一题
-          reset(that)//运行重置函数  
+          reset(that)//运行重置函数
         }, 2000)
-      } else {  //当question中无问题时,即回答完所有问题
-        getNextQuestions = setTimeout(function () { //答完题显示战果
+      } else {  //当question中无问题时即question={},即回答完所有问题
+        getNextQuestions = setTimeout(function () { //答完题显示战果 0:输 1:赢 2:平
           if (that.data.scoreMyself > that.data.score_others) {
             that.setData({
               game_over: true,
@@ -146,12 +175,13 @@ Page({
           })
         }, 2000)
       }
+
       function reset(that) {//定义重置函数
         //获取新题目后,倒计时归为10，将clickIndex清空，hasClick改为未选择.
         that.setData({
           question,//更新题目
           animate_showChoice: '',
-          countdown: 10,
+          countdown: 20,
           localClick: false,
           hasClick: false,
           clickIndex: '',
@@ -166,7 +196,6 @@ Page({
           sendNumber: 0,
           animate_rightAnswer: '',
         })
-
         //（重新）开始倒计时
         clearInterval(timerCountdown)//获取新题目后,倒计时定时器清空(注意：只有将timer_countdown定义在最外边才能清除掉上一个定时器)
         let countdown = that.data.countdown;
@@ -189,7 +218,7 @@ Page({
           if (!that.data.localClick && !that.data.hasClick) {
             that.sendAnswer(that)
           }
-        }, 11000)
+        }, 21000)
       }
     })
   },
@@ -203,7 +232,7 @@ Page({
         })
         //答对了则加分，时间越少加分越多,总分累加
         that.setData({
-          scoreMyself: that.data.scoreMyself + that.data.countdown * 10
+          scoreMyself: that.data.scoreMyself + that.data.countdown * 5
         })
       } else {
         that.setData({
@@ -259,10 +288,14 @@ Page({
       })
     }
   },
-  continue_fighting() {
-    wx.reLaunch({
-      url: '../entry/entry',
-    })
+  continue_fighting(e) {
+    if(e.currentTarget.dataset.friends_match){
+      wx.reLaunch({
+        url: '../../main/main',
+      })
+    }else{
+      wx.navigateBack({})
+    }
   },
   startAnimate() {
     const that = this
@@ -274,6 +307,12 @@ Page({
         zoomOut: 'zoomOut'
       })
     }, 1500)
+  },
+
+  quit: function () {
+    if (app.tunnel && app.tunnel.isActive()) {
+      app.tunnel.close()
+      console.log('[tunnelGame][close]')
+    }
   }
-   */
 })

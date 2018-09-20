@@ -1,9 +1,9 @@
-// pages/main/main.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index');
+var config = require('../../config');
+var util = require('../../utils/util.js')
+var app =getApp()
+
 Page({
-  
-  /**
-   * 页面的初始数据
-   */
   data: {
     items: [{ 'title': '新知学习', 'content': '知识点+题', 'desc': 'basic', 'src': '/images/icons/KnowledgePoint.png' },
     { 'title': '专属题场', 'content': '刷题', 'desc': 'single', 'src': '/images/icons/exercise.png' },
@@ -17,104 +17,62 @@ Page({
     res: ''
   },
 
-  /**
-   * 跳转到详情页
-   */
   navigateToDetail: function(e){
-    console.log('navigateTo:'+e.currentTarget.dataset.desc);
-    var urlName = e.currentTarget.dataset.desc;
+    var urlName = e.currentTarget.dataset.desc
+    var urlTitle = e.currentTarget.dataset.title
     wx.navigateTo({
-      url: '../'+urlName+'/'+urlName,
+      url: '../'+urlName+'/'+urlName+'?title='+urlTitle,
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-        var that = this;
-        /** 
-        * 获取系统信息 
-        */
-        wx.getSystemInfo({
-          success: function (res) {
-            console.log('[main][winHeight]'+res.windowHeight);
-            console.log('[main][winWidth]' + res.windowWidth);
-            console.log('[main][ratio]' + 750 / res.windowWidth);
-            that.setData({
-              winWidth: res.windowWidth,
-              winHeight: res.windowHeight,
-              ratio: 750 / res.windowWidth
-            });
-            wx.setStorageSync('winHeight', res.windowHeight);
-            wx.setStorageSync('winWidth', res.windowWidth);
-            wx.setStorageSync('ratio', 750/res.windowWidth);
-          }
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log('[main][winHeight]'+res.windowHeight);
+        console.log('[main][winWidth]' + res.windowWidth);
+        console.log('[main][ratio]' + 750 / res.windowWidth);
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight,
+          ratio: 750 / res.windowWidth
         });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    let that = this;
-    /**
-     * 判断用户是否登录
-     */
-    let userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo) {
+        wx.setStorageSync('winHeight', res.windowHeight);
+        wx.setStorageSync('winWidth', res.windowWidth);
+        wx.setStorageSync('ratio', 750/res.windowWidth);
+      }
+    })
+    //判断用户是否登录
+    if (!app.globalData.userInfo) {
       wx.navigateTo({
         url: "/pages/authorize/authorize"
       })
-      console.log('login please')
+      console.log('[main]login please')
     } else {
-      that.setData({
-        userInfo: userInfo
-      })
-      console.log('login success')
-      console.log(userInfo)
+      console.log('[main]login success')
     }
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  onReady: function () {},
+  onShow: function () {
+    this.closeTunnel()
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
+  onHide: function () {},
+  onUnload: function () {},
+  onPullDownRefresh: function () {},
+  onReachBottom: function () {},
   onShareAppMessage: function () {
-  
+    return {
+      title: "碎片时间学编程",
+      path: "/pages/main/main"
+    };
+  },
+  closeTunnel() {
+    //当信道连接或者重连了时，关闭已连接的信道
+    if (app.appData.tunnelStatus === 'connect' || app.appData.tunnelStatus === 'reconnect') {
+      app.tunnel.close();
+    }
   }
 })

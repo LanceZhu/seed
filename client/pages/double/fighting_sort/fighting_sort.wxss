@@ -1,15 +1,22 @@
+@import '/utils/buttons.wxss';
+
 .title{
   text-align: center;
+  margin:30rpx;
 }
+
+.chapter_list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .sort{
   width: 80%;
   height: 80rpx;
-  margin: 30rpx auto;
+  margin-bottom: 25rpx;
   line-height: 80rpx;
   text-align: center;
   font-size: 38rpx;
-  border: 4rpx solid white;
-  border-radius: 10rpx;
-  background: rgb(200,200,200);
-  color: #fff;
 }

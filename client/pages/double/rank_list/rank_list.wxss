@@ -1,22 +1,29 @@
-.tab {
-  background:transparent;
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  font-size: 32rpx;
-  line-height: 80rpx;
-  color: #999;
-  font-weight: bold;
-}
+.swiper-tab{  
+    width: 100%;  
+    border-bottom: 2rpx solid #6A84E3;  
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+  } 
 
-.tab view {
-  width: 30%;
+.swiper-tab-list{  
+    font-size: 30rpx;  
+    display: inline-block;  
+    width: 33.33%;  
+    color: #6A84E3;  
+}  
+.on{ 
+    border-bottom: 4rpx solid #6A84E3;
+    font-size: 35rpx;
+    font-weight: 500;
 }
-
-.on {
-  color: #333;
-  border-bottom: 4rpx solid #338fff;
-}
+  
+.swiper-box{ 
+    display: block; 
+    height: 100%; 
+    width: 750rpx; 
+    overflow: hidden;
+  }
 
 .item {
   display: flex;
@@ -45,4 +52,10 @@
 .itemDetail text {
   display: inline-block;
   margin: 10rpx;
+}
+
+.bottomLine{
+  font-size: 30rpx;
+  text-align: center;
+  color: #6A84E3;
 }

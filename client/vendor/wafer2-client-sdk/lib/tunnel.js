@@ -190,7 +190,11 @@ function Tunnel(serviceUrl) {
             onError: handleSocketError,
         });
 
-        wx.connectSocket({ url: url });
+        wx.connectSocket({ 
+          url: url,
+          success() {
+            console.log('开始尝试信道连接')
+          } });
         isFirstConnection = false;
     }
 
