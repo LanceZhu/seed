@@ -1,5 +1,5 @@
 // 此处主机域名修改成腾讯云解决方案分配的域名
-//var host = 'https://468101369.f00bar.cn';
+
 var host = "yourdominname";
 
 var appId = ''
