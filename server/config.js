@@ -3,10 +3,10 @@ const CONF = {
     rootPathname: '',
 
     // 微信小程序 App ID
-    appId: 'wx671c2ea3d46645f0',
+    appId: '',
 
     // 微信小程序 App Secret
-    appSecret: 'a49b4117a05ca4f0ccdff2bab1a5ccff',
+    appSecret: '',
 
     // 是否使用腾讯云代理登录小程序
     useQcloudLogin: true,
@@ -21,8 +21,7 @@ const CONF = {
         port: 3306,
         user: 'root',
         db: 'cAuth',
-        //pass: 'Nlbn6W9l',
-      pass: "wx671c2ea3d46645f0",
+        pass: "",
         char: 'utf8mb4'
     },
 
