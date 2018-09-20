@@ -1,5 +1,8 @@
 {
-	"description": "项目配置文件。",
+	"client": "./client",
+	"svr": "./server",
+	"miniprogramRoot": "./client",
+	"qcloudRoot": "./server",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
@@ -7,10 +10,8 @@
 		"minified": true,
 		"newFeature": true
 	},
-	"compileType": "miniprogram",
-	"libVersion": "1.9.94",
 	"appid": "wx671c2ea3d46645f0",
-	"projectname": "seed",
+	"projectname": "seed_8_16",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -25,12 +26,29 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "friends_match",
+					"pathName": "pages/double/friends_match/friends_match",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "main with shareticket",
+					"pathName": "pages/main/main",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群1",
+						"shareName": "8_Oe8Dl4JYbJPaEf-u71xV7cC0kKgQrjhWrE36JLtdY@cr4dev",
+						"shareKey": "vx1w3q_P4Z3tKt6-XKwNiIAMDuo7w9d2Sy0Op2kno3QE4JgQa162qHriLFNHDN_I6si5IWVMuJI6GLCiTq6IkQ~~"
+					}
+				}
+			]
 		}
 	}
 }

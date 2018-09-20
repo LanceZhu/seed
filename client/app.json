@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/index/index",
+    "pages/single/single",
+    "pages/authorize/authorize",
+    "pages/mine/mine",
+    "pages/tutorial/tutorial",
+    "pages/double/double",
+    "pages/basicDetail/basicDetail",
+    "pages/basic/basic",
+    "pages/double/fighting_match/fighting_match",
+    "pages/logs/logs",
+    "pages/double/rank_list/rank_list",
+    "pages/chat/chat",
+    "pages/dev/dev",
+    "pages/double/fighting_sort/fighting_sort"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#6A84E3",
+    "navigationBarTitleText": "碎片时间学编程",
+    "navigationBarTextStyle": "white"
+  }
+}
