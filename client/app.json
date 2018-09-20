@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/authorize/authorize",
+    "pages/index/index",
+    "pages/basic/basic",
+    "pages/basic/basicDetail/basicDetail",
+    "pages/single/single",
+    "pages/single/tutorial/tutorial",
+    "pages/double/double",
+    "pages/double/fighting_room/fighting_room",
+    "pages/double/fighting_match/fighting_match",
+    "pages/double/rank_list/rank_list",
+    "pages/double/fighting_sort/fighting_sort",
+    "pages/double/friends_sort/friends_sort",
+    "pages/double/friends_match/friends_match",
+    "pages/mine/mine",
+    "pages/mine/handIn/handIn",
+    "pages/mine/mistake/mistake",
+    "pages/mine/calendar/calendar",
+    "pages/mine/news/news",
+    "pages/mine/news/jackaroo_info/jackaroo_info",
+    "pages/mine/schedule/schedule",
+    "pages/mine/mistake/tutorial/tutorial",
+    "pages/single/question_feedback/question_feedback",
+    "pages/mine/feedback/feedback"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#6A84E3",
+    "navigationBarTitleText": "碎片时间学编程",
+    "navigationBarTextStyle": "white"
+  }
+}

@@ -1,0 +1,13 @@
+<view class='header'>
+  <image src='/images/icons/header.png' class='header'></image>
+</view>
+<view class='content' wx:if='{{initCalendarDone}}'>
+  <view class='tip'>已成功签到 <text>{{signinDays.length}}</text> 天</view>
+  <import src="../../../template/calendar/index.wxml"/>
+  <view class="calendar-wrap">
+    <template is="calendar" data="{{...calendar}}" />
+  </view>
+  <view class="signin" hover-class='signin_hover' bindtap='signin'>
+    {{ signinDone ? '已签' : '签到'}}
+  </view>
+</view>

@@ -1,0 +1,45 @@
+page{
+    height: 100%;
+    background-color: #fff;
+}
+
+.device{
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+.seed{
+  height: 200rpx;
+  width: 196rpx;
+  align-self: center;
+}
+
+.note{
+  width:100%;
+  padding-left:30rpx;
+  font-size: 28rpx;
+  margin-top:30rpx;
+  color:#B2B2B2;
+}
+
+.save-btn{
+    width: 680rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    margin-top:30rpx; 
+    border-radius: 6rpx;
+    box-sizing: border-box;
+    background-color: #09BB07;
+    color:#fff;
+}
+
+button[type="default"]{
+    background-color: #ffffff;
+    color:#000;
+}

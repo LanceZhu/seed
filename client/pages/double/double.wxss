@@ -1,0 +1,72 @@
+.device{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  background: #F2F2F2;
+}
+
+.header{
+  width: 750rpx;
+  height: 100rpx;
+}
+
+.content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+}
+
+.box{
+    background: #FFFFFF;
+    width: 650rpx;
+    height: 250rpx;
+    /*width:650rpx;
+    height: 250rpx;*/
+    border-radius: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20rpx 20rpx; 
+    margin-bottom: 50rpx;
+}
+
+.fighting{
+  width:154rpx;
+  height:220rpx;
+}
+
+.friend{
+  width:164rpx;
+  height:166rpx;
+}
+
+.rank{
+  width:170rpx;
+  height:190rpx;
+}
+
+.program{
+  margin-top: 50rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+}
+
+.text{
+  margin-left:40rpx;
+  align-self:flex-start;
+  margin-top:30rpx;
+}
+
+.note{
+  font-size:16px;
+  margin-top:30rpx;
+  color:#888888;
+
+}

@@ -1,0 +1,32 @@
+<view class='device'style='height: {{ winHeight*ratio}}rpx'>
+  <view>
+    <image src='/images/icons/header.png' class='header'></image>
+  </view>
+  <view class='program'>
+  <!--<scroll-view scroll-y style="height:{{winHeight - 150}}px">-->
+    <view class='content'>
+      <view class='box' bindtap='jumpToDetail' data-location='fighting_sort'>
+        <image src='/images/fighting.png' class='fighting'></image>
+        <view class='text'>
+          <view class='title'>随机匹配</view>
+          <view class='note'>你永远不知道，下一个对手会是谁</view>
+        </view>
+      </view>
+      <view class='box' bindtap='jumpToDetail' data-location='friends_sort'>
+        <image src='/images/friend.png' class='friend'></image>
+        <view class='text'>
+          <view class='title'>好友对战</view>
+          <view class='note'>邀请微信好友，相互比拼一较高下</view>
+        </view>
+      </view>
+      <view class='box' bindtap='jumpToDetail' data-location='rank_list'>
+        <image src='/images/rank.png' class='rank'></image>
+        <view class='text'>
+          <view class='title'>我的排名</view>
+          <view class='note'>好友和全球排行，你能排在第几名？</view>
+        </view>
+      </view>
+    </view>
+  <!--</scroll-view>-->
+  </view>
+</view>

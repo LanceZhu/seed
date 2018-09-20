@@ -1,0 +1,45 @@
+.device{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header{
+  width: 750rpx;
+  height: 100rpx;
+}
+
+.content{
+  background: #fff;
+  height: 100%;
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap:wrap;
+  margin-top: 155.330086;
+}
+
+.box{
+  width:300rpx;
+  height: 400rpx;
+  margin-top: 50rpx;
+  margin-left: 50rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: blue;
+  background: transparent;
+}
+
+.box_image{
+  width: 252rpx;
+  height: 252rpx;
+}
+
+.box_title{
+    display: block;
+}

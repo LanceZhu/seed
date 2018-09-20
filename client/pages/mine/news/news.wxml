@@ -1,0 +1,23 @@
+<view class='device'>
+ <image src='/images/icons/header.png' class='header_image'></image>
+  <view class='content'>
+      <view class='programs'>
+        <view class = 'program'>
+          <image src='/images/icons/lettered.png' class='image1'></image>
+          <view class = 'text'>未读消息：0</view>
+        </view>
+        <view class='program'>
+         <image src='/images/icons/letterop.png' class='image2'></image>
+         <view class ='text'>已读消息：0</view>
+        </view>
+      </view>
+
+    <view class='news'>
+    <view wx:for="{{items}}" wx:key='items'  class='box'>
+      <view class = 'box_title'>{{item.title}}</view>
+      <view class = 'box_info'>{{item.info}}</view>
+      <image src='/images/icons/more.png' class = 'more' bindtap='jumpToDetail'></image>
+    </view>
+  </view>
+  </view>
+</view>

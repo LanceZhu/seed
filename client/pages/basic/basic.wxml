@@ -1,0 +1,43 @@
+<view class='device'>
+  <view>
+    <image src='/images/icons/header.png' class='header'></image>
+  </view>
+  <view style='margin-top: 100rpx'>
+  <scroll-view scroll-y style="height:{{winHeight - 120}}px">
+    <view class='content'>
+
+        <view class="kind-list">
+
+        <block wx:for="{{itemss}}" wx:for-item='chapter' wx:key="{{chapter.id}}">
+
+          <view class="kind-list-item">
+
+            <view id="{{chapter.id}}" class="kind-list-item-hd {{chapter.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
+
+              <view class="kind-list-text">{{chapter.name}}</view>
+
+            </view>
+
+            <view class="kind-list-item-bd {{chapter.open ? 'kind-list-item-bd-show' : ''}}">
+
+              <view class="navigator-box {{chapter.open ? 'navigator-box-show' : ''}}">
+
+                <block wx:for="{{chapter.children}}" wx:for-item='unit' wx:key="*item" wx:for-index='index'>
+                  <navigator url="./basicDetail/basicDetail?chapterId={{chapter.id}}&nameId={{index+1}}&chapter={{chapter.name}}&name={{unit}}" class="navigator">
+                    <view class="navigator-text">{{unit}}</view>
+                    <view class="navigator-arrow"></view>
+                  </navigator>
+                </block>
+                
+              </view>
+            </view>
+
+          </view>
+        </block>
+        
+      </view>
+
+    </view>
+  </scroll-view>
+  </view>
+</view>

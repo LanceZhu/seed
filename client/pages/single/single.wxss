@@ -1,0 +1,87 @@
+@import '/towxml/style/main_min.wxss';
+@import '/towxml/style/theme/min.wxss';
+@import '/utils/buttons.wxss';
+
+.chapter_list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title{
+  text-align: center;
+  margin-left: 80rpx;
+  margin-right: 80rpx;
+  font-size:16px;
+}
+
+.chapter_wraper{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.chapter{
+  width: 580rpx;
+  height: 80rpx;
+  margin-bottom: 25rpx;
+  /*border: 1px solid #6A84E3;*/
+  /*border-radius: 50rpx;*/
+  line-height: 80rpx;
+  /*text-align: center;*/
+  font-size:18px;
+}
+
+.content{
+  background: #6A84E3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap:wrap;
+  padding: 50rpx 0 0;
+}
+
+.question{
+  width:650rpx;
+  text-align: left;
+  color: #fff;
+}
+
+.answer{
+  border: 2px solid #FFFFFF;
+  border-radius: 50rpx;
+  width: 600rpx;
+  height: 100rpx;
+  text-align: center;
+  background: #6A84E3;
+  color: #fff;
+  margin-top: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:0rpx 25rpx;
+  font-size: 34rpx;
+}
+
+.right {
+  /*选择正确的答案颜色*/
+  background: #72CB6F;
+  color: #fff;
+}
+
+.error {
+  /*选择错误的答案颜色*/
+  background: #F5675D;
+  color: #fff;
+}
+
+.recommendationDone{
+  font-size: 35rpx;
+  color: #fff;
+  text-align: center;
+  padding-left:100rpx;
+  padding-right:100rpx;
+}

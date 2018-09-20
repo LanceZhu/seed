@@ -1,0 +1,5 @@
+<import src="/towxml/entry.wxml"/>
+<template is="entry" data="{{...article}}"/>
+<view class='next' wx:if="{{!isLoading}}">
+  <view class='continue' bindtap='continue'>巩固练习</view>
+</view>

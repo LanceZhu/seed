@@ -1,0 +1,72 @@
+/**主题配色**/
+@import '/towxml/style/theme/light.wxss';
+
+/**基础风格样式**/
+@import '/towxml/style/main.wxss';
+
+.device{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.header{
+  width: 750rpx;
+  height: 100rpx;
+}
+
+.content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1;
+}
+
+.content_title{
+  box-shadow: 5rpx 5rpx 5rpx #AAE1AA;
+  height: 100rpx;
+  width: 700rpx;
+  font-size: 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10rpx;
+  margin-bottom: 40rpx;
+}
+
+.box{
+  margin-bottom: 20rpx;
+  width:650rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+  box-shadow: 3rpx 3rpx 3rpx blueviolet;
+  background: rgb (248,248,248);
+}
+
+.next{
+  width: 750rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.continue{
+  margin-right: 20rpx;
+  margin-bottom: 40rpx;
+  padding: 5rpx 10rpx;
+  background: rgb(106, 132, 227);
+  color: white;
+  width: 170rpx;
+  height: 65rpx;
+  line-height: 65rpx;
+  border-radius: 50rpx;
+  text-align: center
+}

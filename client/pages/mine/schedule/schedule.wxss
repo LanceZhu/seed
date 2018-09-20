@@ -1,0 +1,220 @@
+@import '../../../template/calendar/index.wxss';
+
+.header{
+  width: 750rpx;
+  height: 100rpx;
+}
+
+.container {
+  margin-top: 40rpx;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.options {
+  display: flex;
+  display: -webkit-flex;
+  height: 88rpx;
+  margin: 16rpx 43rpx 0;
+  border-bottom: 1px solid #F1F1F1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #AAAAAA;
+}
+
+.options .option {
+  display: flex;
+  display: -webkit-flex;
+  width: 33%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.option view {
+  width: 48rpx;
+  height: 100%;
+}
+
+.options .sel view {
+  color: #333333;
+  border-bottom: 2px solid #2DC3A6;
+}
+
+.date {
+  margin-top: 20rpx;
+}
+
+.date .now {
+  color: #2DC3A6;
+}
+
+.date .pick {
+  
+}
+
+.date .hide {
+  display: none;
+}
+
+.date .arrow {
+  width: 16rpx;
+  height: 16rpx;
+  transform: rotate(45deg)
+}
+
+.arrowLeft {
+  border-left: 2px solid #2DC3A6;
+  border-bottom: 2px solid #2DC3A6;
+}
+
+.arrowRight {
+  border-top: 2px solid #2DC3A6;
+  border-right: 2px solid #2DC3A6;
+}
+
+.chart {
+  position: relative;
+  height: 600rpx;
+  margin: 0 24rpx;
+}
+
+.chart .touchMove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+/* calendar */
+.date-area {
+  width: 460rpx;
+}
+
+.pie .average {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.average .item {
+  width: 50%;
+  text-align: center;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.average .item .number {
+  margin: 4rpx 0;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.pie .pieChart {
+  width: 100%;
+  height: 354rpx;
+}
+
+.radar {
+  width: 100%;
+  height: 550rpx;
+  margin-top: 112rpx;
+}
+
+.description, .analysis {
+  margin-top: 80rpx;
+}
+
+.description .type {
+  margin: 0 48rpx;
+}
+
+.type view {
+  padding: 10rpx 0;
+  font-size: 32rpx;
+  color: #333333;
+}
+
+.type .title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.description .img, .analysis .img {
+  width: 654rpx;
+  height: 392rpx;
+  margin: 20rpx 48rpx 0;
+}
+
+.description .img {
+  border-radius: 10px;
+}
+
+.description .report {
+  margin: 62rpx 48rpx 0;
+}
+
+.report .title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.report .content {
+  padding: 16rpx 0;
+  text-align: justify;
+  line-height: 52rpx;
+  font-size: 32rpx;
+}
+
+.analysis .img {
+  margin: 0 48rpx;
+}
+
+.analysis .text {
+  margin: 48rpx;
+  text-align: justify;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.analysis .text .title {
+  margin: 16rpx 0;
+  font-weight: bold;
+  color: #333333;
+}
+
+.analysis .test {
+  height: 104rpx;
+  margin: 48rpx;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 104rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #2DC3A6;
+  background: #F5F5F5;
+}
+
+.att {
+  position: absolute;
+  display: flex;
+  display: -webkit-flex;
+  left: 0;
+  right: 0;
+  bottom: 43rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.att .arrow {
+  width: 58rpx;
+  height: 32rpx;
+}

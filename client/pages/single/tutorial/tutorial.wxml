@@ -1,0 +1,22 @@
+<view class='device'>
+  <view class='header'>
+    <view class='question'>
+      <import src="/towxml/entry.wxml"/>
+      <template is="entry" data="{{...ask}}"/>
+    </view>
+    <view class='answer'>
+      所有选项：
+      <view class='all_choice' wx:for="{{question.answer}}" wx:key='choice' wx:for-item="choice">{{index+1}}、{{choice.answer}}</view>
+      正确答案：
+      <view class='right_choice'>{{right_answer}}</view>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='tutorial'>
+      {{analysis}}
+    </view>
+    <view class='next'>
+      <view class='button' bindtap='next'>继续练习</view>
+    </view>
+  </view>
+</view>

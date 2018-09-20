@@ -1,0 +1,48 @@
+.device{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.header{
+  background: #6A84E3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  padding: 20rpx;
+}
+
+.header .direction{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 610rpx;
+}
+
+.header .direction .box{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 10rpx;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 50rpx;
+}
+
+.content .next{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.content .next .button{
+  background: #6A84E3;
+  padding: 20rpx 60rpx;
+  color: white;
+  border-radius: 20rpx;
+}

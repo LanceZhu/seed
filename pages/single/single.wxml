@@ -1,8 +1,0 @@
-  <view class='content' style='height: {{ winHeight*ratio - 50 }}rpx'>
-    <view class='question'>{{items.question}}</view>
-    <view>
-      <view class="answer {{item.id==clickId&&clickId!='' ? answerColor:''}}" wx:for="{{items.answers}}" wx:key="answers" bindtap="answer" data-id="{{item.id}}" data-right="{{item.right}}">
-        {{item.answer}}
-      </view>
-    </view>
-  </view>

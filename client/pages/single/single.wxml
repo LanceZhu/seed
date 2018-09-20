@@ -1,0 +1,36 @@
+<view class='device'> 
+  <view wx:if="{{!recommendationDone}}">
+    <view class='content' style='height: {{ winHeight*ratio - 50 }}rpx' wx:if="{{chapters_chosen}}">
+      <view class='question'>
+        <import src="/towxml/entry.wxml"/>
+        <template is="entry" data="{{...ask}}"/>
+      </view>
+      <view>
+        <view class="answer {{index+1==clickIndex&&clickIndex!='' ? answerColor:''}} {{clickIndex!=''&&item.right==true ? 'right':''}}" wx:for="{{question.answer}}" wx:key="answers" bindtap="answer" data-id="{{question.id}}" data-right="{{item.right}}" data-index="{{index+1}}">
+          {{item.answer}}
+        </view>
+      </view>
+    </view>
+
+      <view class='chapter_list' style='height: {{ winHeight*ratio }}rpx' wx:if="{{!chapters_chosen}}">
+      <view class='title'>
+        可一次选择多个要练习的知识点，点击页面下方的“提交”,系统将推荐练习题目
+      </view>
+      <checkbox-group bindchange="checkboxChange">
+        <view class='chapter_wraper' wx:for="{{chapters}}" wx:key='chapter' wx:for-item='chapter'>
+          <label>
+            <view class='chapter button button-3d button-primary button-rounded' style="background-color:{{chapter.checked ? '#4cb0f9':'#94D0FB'}};color:{{chapter.checked ? '#0880d7':'#fff'}}">
+              <checkbox hidden value="{{chapter.chapter}}" checked="{{chapter.checked}}"></checkbox>
+              <text class='chapter_name'>{{chapter.chapter}}</text>
+            </view>
+          </label>
+        </view>
+      </checkbox-group>
+      <button class='chapter_submitbutton button button-3d button-royal' bindtap='chapter_submit'style='  width: 580rpx;  height: 100rpx; line-height: 100rpx;'>提交</button>
+    </view>
+  </view>
+
+  <view class='content recommendationDone' wx:if="{{recommendationDone}}" style='height: {{ winHeight*ratio -50 }}rpx'>
+    您已完成了本组巩固练习，若想要进行更多相应知识点的练习，可访问“专属题场”或“双人PK”
+  </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="device">
+    <image src='/images/SEED3.png' class='seed'></image>
+    <form bindsubmit="bindSave">
+    <view class='note'>1、同意当前小程序获取我的微信头像；</view>
+    <view class='note'>2、同意当前小程序获取我的微信昵称等其他信息；</view>
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="save-btn">授权登录</button>
+    </form>
+</view>

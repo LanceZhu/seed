@@ -1,0 +1,7 @@
+<view class='device'>
+ <image src='/images/icons/header.png' class='header_image'></image>
+  <view class='content'>
+      <view class='title' style =''>{{items.title}}</view>
+      <view class = 'longInfo'>{{items.long_info}}</view>
+  </view>
+</view>
